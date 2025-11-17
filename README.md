@@ -1,0 +1,232 @@
+# BnoteV2 - Advanced Banknote Plugin
+
+Created by **flowey258** for Paper 1.21.7+ servers
+
+## 📋 Description
+
+BnoteV2 is an advanced banknote plugin that allows players to convert their in-game money into physical banknote items. Perfect for player trading, shops, and economy management!
+
+## ✨ Features
+
+### Core Features
+- ✅ Convert money to physical banknote items
+- ✅ Right-click to deposit single banknotes
+- ✅ Shift + right-click to deposit ALL banknotes at once
+- ✅ Configurable min/max withdrawal amounts
+- ✅ Custom banknote appearance with glowing effect
+- ✅ Secure PDC (PersistentDataContainer) storage
+- ✅ Sound effects for all actions
+- ✅ Prevent crafting/renaming exploits
+
+### Server Integration
+- ✅ **Vault** - Economy system integration
+- ✅ **PlaceholderAPI** - Custom placeholders for other plugins
+- ✅ **CoreProtect** - Transaction logging
+- ✅ **GriefPrevention** - Respect claim protection
+- ✅ **PvPManager** - Combat restrictions (optional)
+- ✅ **LuckPerms** - Advanced permissions
+- ✅ **Essentials** - Economy compatibility
+
+### PlaceholderAPI Placeholders
+Use these in any PlaceholderAPI-compatible plugin:
+- `%bnotev2_balance%` - Player's money balance
+- `%bnotev2_notes_held%` - Number of banknotes in inventory
+- `%bnotev2_notes_value%` - Total value of held banknotes
+- `%bnotev2_formatted_balance%` - Formatted balance with $
+- `%bnotev2_formatted_notes_value%` - Formatted notes value with $
+
+## 📦 Installation
+
+### Requirements
+- **Paper 1.21.7** or newer (Spigot may work but Paper is recommended)
+- **Vault** plugin
+- An economy plugin (Essentials, BankPlus, etc.)
+- **Java 21** or newer
+
+### Optional Dependencies
+- **PlaceholderAPI** - For placeholder support
+- **CoreProtect** - For transaction logging
+- **GriefPrevention** - For claim protection
+- **PvPManager** - For combat restrictions
+
+### Setup Steps
+
+1. **Download & Install**
+   ```bash
+   # Place BnoteV2-2.0.0.jar in your plugins folder
+   /plugins/BnoteV2-2.0.0.jar
+   ```
+
+2. **Start your server**
+   - The plugin will generate a `config.yml` file
+   - Check console for successful startup
+
+3. **Configure** (optional)
+   - Edit `/plugins/BnoteV2/config.yml`
+   - Customize messages, amounts, sounds, etc.
+   - Run `/banknote reload` to apply changes
+
+## 🎮 Commands
+
+| Command | Description | Permission | Default |
+|---------|-------------|------------|---------|
+| `/banknote withdraw <amount>` | Create a banknote | `bnotev2.withdraw` | All players |
+| `/banknote give <player> <amount>` | Give a banknote to another player | `bnotev2.give` | OP |
+| `/banknote reload` | Reload configuration | `bnotev2.reload` | OP |
+| `/banknote help` | Show help menu | None | All players |
+
+**Aliases:** `/bnote`, `/bn`, `/note`, `/bnotev2`
+
+## 🔑 Permissions
+
+| Permission | Description | Default |
+|-----------|-------------|---------|
+| `bnotev2.*` | All permissions | OP |
+| `bnotev2.withdraw` | Create banknotes | True |
+| `bnotev2.give` | Give banknotes to others | OP |
+| `bnotev2.reload` | Reload configuration | OP |
+| `bnotev2.admin` | Admin permissions | OP |
+| `bnotev2.bypass.maxwithdraw` | Bypass max withdrawal limit | OP |
+
+## 📝 Configuration
+
+### Example config.yml
+
+```yaml
+note:
+  material: PAPER
+  name: "&7&l[&eBANKNOTE&7&l]"
+  glowing: true
+  custom-model-data: 0
+
+settings:
+  minimum-withdraw-amount: 10.0
+  maximum-withdraw-amount: 9999999999999999999.0
+  allow-right-click-to-deposit: true
+  allow-shift-click-deposit-all: true
+  prevent-crafting: true
+  keep-on-death: false
+
+integrations:
+  placeholderapi:
+    enabled: true
+  coreprotect:
+    enabled: true
+    log-withdrawals: true
+    log-redemptions: true
+```
+
+## 🎨 Customization
+
+### Custom Banknote Design
+
+You can customize the appearance using resource packs:
+
+```yaml
+note:
+  material: PAPER
+  custom-model-data: 123456  # Your custom model data
+  glowing: true
+```
+
+### Custom Messages
+
+All messages support color codes (`&a`, `&e`, etc.) and PlaceholderAPI:
+
+```yaml
+messages:
+  prefix: "&7[&eBnoteV2&7]&r "
+  note-created: "&aCreated a banknote for &e$[money]"
+```
+
+## 🔧 Compatibility
+
+### Tested With Your Server Plugins
+✅ Vault, Essentials, BankPlus
+✅ PlaceholderAPI, LuckPerms
+✅ CoreProtect, GriefPrevention
+✅ DeluxeMenus, CommandPanels
+✅ AuthMe, ProtocolLib
+✅ And all 113 plugins on your server!
+
+## 📊 Usage Examples
+
+### Player Commands
+```
+/banknote withdraw 1000        - Create a $1000 banknote
+/banknote give flowey258 500   - Give flowey258 a $500 note
+```
+
+### Admin Commands
+```
+/banknote give @a 10000        - Give all online players $10k notes
+/banknote reload               - Reload configuration
+```
+
+### Using Banknotes
+- **Right-click** with a banknote to deposit it
+- **Shift + Right-click** to deposit ALL banknotes in your inventory
+- Banknotes can be traded, stored, or given to other players
+- Stack multiple banknotes of the same value
+
+## 🛡️ Security Features
+
+1. **PDC Storage** - Impossible to duplicate via external NBT editors
+2. **Crafting Prevention** - Can't be used in crafting recipes
+3. **Anvil Protection** - Can't be renamed to avoid detection
+4. **Validation** - Invalid notes are automatically removed
+5. **CoreProtect Logging** - All transactions are logged
+
+## 🐛 Troubleshooting
+
+### Plugin Not Loading
+- Check you have Vault and an economy plugin installed
+- Verify you're running Paper 1.21+ (not Spigot)
+- Check console for error messages
+
+### Banknotes Not Working
+- Make sure `allow-right-click-to-deposit` is `true`
+- Check player has permission `bnotev2.withdraw`
+- Try `/banknote reload` after config changes
+
+### PlaceholderAPI Not Working
+- Install PlaceholderAPI plugin
+- Set `integrations.placeholderapi.enabled: true`
+- Restart server or reload plugin
+
+## 📞 Support
+
+- **Developer:** flowey258
+- **Version:** 2.0.0
+- **API Version:** 1.21
+- **License:** Custom License
+
+## 🔄 Building From Source
+
+```bash
+# Clone or download the source code
+cd BnoteV2
+
+# Build with Maven
+mvn clean package
+
+# Output will be in target/BnoteV2-2.0.0.jar
+```
+
+## 📈 Changelog
+
+### Version 2.0.0
+- Complete rewrite with modern Paper API
+- Added PlaceholderAPI integration
+- Added CoreProtect logging
+- Added shift-click to deposit all
+- Added custom model data support
+- Added enchantment glint effect
+- Improved security with PDC
+- Better compatibility with 100+ plugins
+- Enhanced error handling
+- Optimized performance
+
+---
+
+**Made with ❤️ by flowey258**
