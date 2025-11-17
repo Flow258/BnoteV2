@@ -1,0 +1,130 @@
+# ╔═══════════════════════════════════════════════════════════╗
+# ║                    BnoteV2 Configuration                  ║
+# ║                    Created by flowey258                   ║
+# ║                         Version 2.0                       ║
+# ╚═══════════════════════════════════════════════════════════╝
+
+note:
+  # Material for the banknote (PAPER, FEATHER, etc.)
+  material: PAPER
+
+  # Display name with color codes (&)
+  name: "&7&l[&eʙᴀɴᴋɴᴏᴛᴇ&7&l]"
+
+  # Lore displayed on the banknote
+  # Available placeholders: [money], [creator], [date]
+  lore:
+    - '&7Use this to deposit money into your account!'
+    - ''
+    - "&e[⛨] &fInformation:"
+    - "&f• &7ᴠᴀʟᴜᴇ: &a$[money]"
+    - '&f• &7ᴄʀᴇᴀᴛᴇᴅ ʙʏ: &a[creator]'
+    - '&f• &7ᴅᴀᴛᴇ: &7[date]'
+    - ''
+    - '&7&l[&eʀɪɢʜᴛ ᴄʟɪᴄᴋ ᴛᴏ ᴜꜱᴇ&7&l]'
+
+  # Custom model data for resource packs (set to 0 to disable)
+  custom-model-data: 0
+
+  # Add enchantment glint effect to make notes stand out
+  glowing: true
+
+settings:
+  # Name displayed for console-created notes (supports PlaceholderAPI)
+  console-name: "&cServer"
+
+  # Decimal formatting
+  minimum-float-amount: 0  # Minimum decimal places
+  maximum-float-amount: 2  # Maximum decimal places
+
+  # Withdrawal limits
+  minimum-withdraw-amount: 10.0
+  maximum-withdraw-amount: 9999999999999999999.0
+
+  # Interaction settings
+  allow-right-click-to-deposit: true  # Right-click to deposit single note
+  allow-shift-click-deposit-all: true  # Shift + right-click to deposit all notes
+
+  # Security settings
+  prevent-crafting: true        # Prevent using notes in crafting recipes
+  prevent-anvil-renaming: true  # Prevent renaming notes in anvils
+  prevent-dropping: false       # Prevent dropping notes
+  keep-on-death: false         # Keep notes in inventory on death
+
+  # Integration settings
+  griefprevention-protection: true  # Respect GriefPrevention claims
+  combat-restriction: false         # Prevent withdrawing during combat (requires PvPManager)
+
+  # Date format for banknote creation (Java SimpleDateFormat)
+  date-format: "MMM dd, yyyy"
+
+  # Sound effects (use Minecraft sound names or leave blank to disable)
+  sounds:
+    create: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    redeem: "ENTITY_PLAYER_LEVELUP"
+    error: "ENTITY_VILLAGER_NO"
+    give: "ENTITY_ITEM_PICKUP"
+
+# ╔═══════════════════════════════════════════════════════════╗
+# ║                         Messages                          ║
+# ╚═══════════════════════════════════════════════════════════╝
+
+messages:
+  # Prefix for all messages (supports PlaceholderAPI)
+  prefix: "&7[&eBnoteV2&7]&r "
+
+  # Error messages
+  insufficient-funds: "&cYou do not have enough money to withdraw &e$[money]"
+  insufficient-permissions: "&cYou don't have permission to do that!"
+  inventory-full: "&cYour inventory is full! Make space to create a banknote"
+  invalid-note: "&cThis banknote is invalid! It has been removed"
+  invalid-number: "&cInvalid number! Please enter a valid amount"
+  nothing-in-hand: "&cYou're not holding a banknote!"
+  less-than-minimum: "&cAmount must be at least &e$[money]"
+  more-than-maximum: "&cAmount cannot exceed &e$[money]"
+  target-not-found: "&cPlayer not found: &e[player]"
+  target-offline: "&cPlayer &e[player] &cis not online!"
+
+  # Success messages
+  note-created: "&aCreated a banknote for &e$[money]"
+  note-given: "&aGave a banknote for &e$[money] &ato &e[player]"
+  note-received: "&aYou received a banknote for &e$[money] &afrom &e[player]"
+  note-redeemed: "&aRedeemed banknote for &e$[money]"
+  notes-redeemed-multiple: "&aRedeemed &e[count] &abanknotes for a total of &e$[money]"
+  reloaded: "&aConfiguration reloaded successfully!"
+
+  # Region/Combat restrictions
+  cannot-withdraw-in-claim: "&cYou cannot withdraw banknotes in this area!"
+  cannot-withdraw-in-combat: "&cYou cannot withdraw banknotes while in combat!"
+
+  # Usage messages
+  usage:
+    main: |-
+      &e&l╔═══════════════════════════════════╗
+      &e&l║      &fBnoteV2 Commands &e&l           ║
+      &e&l╚═══════════════════════════════════╝
+      &e/banknote withdraw <amount> &7- Create a banknote
+      &e/banknote give <player> <amount> &7- Give a banknote
+      &e/banknote reload &7- Reload configuration
+      &e/banknote help &7- Show this help menu
+    withdraw: "&eUsage: &7/banknote withdraw <amount>"
+    give: "&eUsage: &7/banknote give <player> <amount>"
+
+# ╔═══════════════════════════════════════════════════════════╗
+# ║                  Integration Settings                     ║
+# ╚═══════════════════════════════════════════════════════════╝
+
+integrations:
+  # PlaceholderAPI placeholders
+  # Use %bnotev2_balance% for player's money balance
+  # Use %bnotev2_notes_held% for number of notes in inventory
+  # Use %bnotev2_notes_value% for total value of notes held
+  placeholderapi:
+    enabled: true
+
+  # Log banknote transactions to CoreProtect
+  coreprotect:
+    enabled: true
+    log-withdrawals: true
+    log-redemptions: true
+    log-gives: true

@@ -1,0 +1,45 @@
+name: BnoteV2
+version: '${project.version}'
+main: com.flowey258.bnotev2.BnoteV2
+api-version: '1.21'
+authors: [flowey258]
+description: Advanced Banknote Plugin with full server integration
+website: https://github.com/flowey258
+load: POSTWORLD
+depend: [Vault]
+softdepend: [PlaceholderAPI, Essentials, BankPlus, GriefPrevention, LuckPerms, TAB]
+
+commands:
+  banknote:
+    description: Main banknote command
+    usage: /banknote <withdraw|give|reload|help> [amount] [player]
+    aliases: [bnote, bn, note, bnotev2]
+
+permissions:
+  bnotev2.*:
+    description: Grants all BnoteV2 permissions
+    default: op
+    children:
+      bnotev2.withdraw: true
+      bnotev2.give: true
+      bnotev2.reload: true
+      bnotev2.admin: true
+  bnotev2.withdraw:
+    description: Allows withdrawing money as banknotes
+    default: true
+  bnotev2.give:
+    description: Allows giving banknotes to other players
+    default: op
+  bnotev2.reload:
+    description: Allows reloading the plugin configuration
+    default: op
+  bnotev2.admin:
+    description: Grants admin permissions for BnoteV2
+    default: op
+    children:
+      bnotev2.give: true
+      bnotev2.reload: true
+      bnotev2.bypass.maxwithdraw: true
+  bnotev2.bypass.maxwithdraw:
+    description: Bypass maximum withdrawal limits
+    default: op
